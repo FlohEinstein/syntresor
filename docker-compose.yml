@@ -1,0 +1,19 @@
+version: '2'
+services:
+  syntresor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+        - "6080:6080"
+    environment:
+        - DISPLAY=:1 
+        - NOVNCPORT=6080
+    volumes:
+        - ./config/.config:/home/tresorit/.config
+        - ./config/Profiles:/home/tresorit/Profiles
+        - ./data/Reports:/home/tresorit/Reports
+        - ./data/Logs:/home/tresorit/Logs
+        - ./data/Temp:/home/tresorit/Temp
+        - /:/home/tresorit/externalroot
+        
