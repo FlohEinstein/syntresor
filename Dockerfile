@@ -18,7 +18,9 @@ RUN apt-get update -y && \
 		menu && \
 	apt autoclean && \
     apt autoremove -y && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+	echo fs.inotify.max_user_watches=100000 | \
+	tee -a /etc/sysctl.conf; sysctl -p
 
 # copy startup script
 ADD startup.sh /startup.sh

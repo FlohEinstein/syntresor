@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -f /tmp/.X1-lock
 export DISPLAY=:1
 Xvfb :1 -screen 0 1600x900x16 &
 sleep 5
