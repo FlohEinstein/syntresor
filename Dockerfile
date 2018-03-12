@@ -1,16 +1,19 @@
 FROM ubuntu:bionic
 ENV DEBIAN_FRONTEND noninteractive 
 
-# dependencies
+# update the system
 RUN apt-get update -y && \
-    apt-get upgrade -y && \
-	apt-get install -y --force-yes --no-install-recommends \
+    apt-get upgrade -y
+
+# dependencies
+RUN apt-get install -y --no-install-recommends \
 	x11vnc \
 	net-tools \
 	ca-certificates \
 	curl \
 	python \
 	python-numpy \
+	python-xdg \
 	xvfb \
 	openbox \
 	menu 
@@ -41,21 +44,21 @@ RUN mkdir -p /home/tresorit/.config/Tresorit \
 			 /home/tresorit/Profiles \
 			 /home/tresorit/Reports \
 			 /home/tresorit/Temp \
-			 /home/tresorit/externalroot
+			 /home/tresorit/external
 
 USER root
 
 # cleanup
 RUN apt autoclean && \
     apt autoremove -y && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+	chmod +777 /tmp
 
 # add the startup script
 ADD startup.sh /startup.sh
 RUN chmod 0755 /startup.sh
 
 USER tresorit
-VOLUME /home/tresorit/.config/Tresorit /home/tresorit/Logs /home/tresorit/Profiles /home/tresorit/Reports /home/tresorit/Temp /home/tresorit/externalroot
+VOLUME /home/tresorit/.config/Tresorit /home/tresorit/Logs /home/tresorit/Profiles /home/tresorit/Reports /home/tresorit/Temp /home/tresorit/external
 EXPOSE 6080
 CMD /startup.sh
-
