@@ -7,13 +7,10 @@ services:
     ports:
         - "6080:6080"
     environment:
-        - DISPLAY=:1 
         - NOVNCPORT=6080
+        - VNCPASSWORD=mypassword
+        - NOVNCCERT=none
+        - NOVNCSSLONLY=false
     volumes:
-        - ./config/.config:/home/tresorit/.config
         - ./config/Profiles:/home/tresorit/Profiles
-        - ./data/Reports:/home/tresorit/Reports
-        - ./data/Logs:/home/tresorit/Logs
-        - ./data/Temp:/home/tresorit/Temp
-        - /:/home/tresorit/externalroot
-        
+        - /volume1:/home/tresorit/external/volume1        

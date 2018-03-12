@@ -1,0 +1,7 @@
+*.swp
+config/.config/*
+config/Profiles/*
+data/Logs/*
+data/Reports/*
+data/Temp/*
+
