@@ -52,4 +52,4 @@ RUN curl -L https://github.com/novnc/noVNC/archive/master.tar.gz | tar xzv && \
 VOLUME /home/tresorit/Profiles /home/tresorit/external
 USER root
 EXPOSE 6080
-CMD /startup.sh
+CMD ["/startup.sh"]
